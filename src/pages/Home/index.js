@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   HomeContainer, HeroesContainer, MarvelLogo, Title, SubTitle
@@ -38,7 +39,6 @@ class Home extends React.Component {
 
   render() {
     const { heroes } = this.props;
-    console.log('heroes', heroes.isRequesting);
 
     return (
       <HomeContainer>
@@ -63,6 +63,12 @@ class Home extends React.Component {
     );
   }
 }
+
+Home.propTypes = {
+  heroes: PropTypes.node.isRequired,
+  getHeroes: PropTypes.func.isRequired,
+  searchHeroe: PropTypes.func.isRequired
+};
 
 const mapStateToProps = ({ heroes }) => ({ heroes });
 

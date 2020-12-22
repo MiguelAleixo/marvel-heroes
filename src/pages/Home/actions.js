@@ -4,7 +4,7 @@ import {
   GET_HEROES_FAILURE,
 } from './constants';
 import api from '../../providers/api';
-import KEYS from '../../constants/keys';
+import { KEYS } from '../../constants/keys';
 
 export function getHeroes() {
   return dispach => {

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Photo, Name, Container, FlexContainer, Icon,
 } from './styles';
@@ -18,5 +19,10 @@ function Hero({ photo, name }) {
     </Container>
   );
 }
+
+Hero.propTypes = {
+  photo: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
+};
 
 export default Hero;
