@@ -1,17 +1,19 @@
 import React from 'react';
-import { HomeContainer, HeroesContainer, MarvelLogo, Title, SubTitle } from './styles';
-import logo from '../../assets/logo/marvel.png'
-import TextField from '../components/TextField'
-import Hero from '../components/Hero'
-import { connect } from 'react-redux'
-import * as actions from './actions'
+import { connect } from 'react-redux';
+import {
+  HomeContainer, HeroesContainer, MarvelLogo, Title, SubTitle
+} from './styles';
+import logo from '../../assets/logo/marvel.png';
+import TextField from '../components/TextField';
+import Hero from '../components/Hero';
+import * as actions from './actions';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       timeout: null
-    }
+    };
   }
 
   componentDidMount = () => {
@@ -20,32 +22,36 @@ class Home extends React.Component {
 
   getHeroes = () => {
     const { getHeroes } = this.props;
-    getHeroes()
+    getHeroes();
   }
 
   searchHeroe = value => {
-    const { timeout } = this.state
+    const { timeout } = this.state;
     const { searchHeroe } = this.props;
     clearTimeout(timeout);
     this.setState({
-      timeout: setTimeout(function () {
-        searchHeroe(value)
+      timeout: setTimeout(() => {
+        searchHeroe(value);
       }, 1000)
-    })
+    });
   }
 
   render() {
     const { heroes } = this.props;
-    console.log('heroes', heroes.isRequesting)
+    console.log('heroes', heroes.isRequesting);
 
     return (
       <HomeContainer>
         <MarvelLogo src={logo} />
         <Title> EXPLORE O UNIVERSO </Title>
-        <SubTitle> Mergulhe no domínio deslumbrante de todos os personagens clássicos que você ama - e aqueles que você descobrirá em breve! </SubTitle>
+        <SubTitle>
+          Mergulhe no domínio deslumbrante de todos os personagens clássicos que você ama
+          - e aqueles que você descobrirá em breve!
+        </SubTitle>
         <TextField
           onChange={(e) => this.searchHeroe(e.target.value)}
-          placeholder='Procure por heróis' />
+          placeholder="Procure por heróis"
+        />
         <HeroesContainer>
           {
             !heroes.isRequesting && heroes.content.data && heroes.content.data.results.map(obj => (
@@ -58,6 +64,8 @@ class Home extends React.Component {
   }
 }
 
-const mapStateToProps = ({ heroes }) => ({ heroes })
+const mapStateToProps = ({ heroes }) => ({ heroes });
 
-export default connect(mapStateToProps, { getHeroes: actions.getHeroes, searchHeroe: actions.searchHeroe })(Home)
+export default connect(mapStateToProps, {
+  getHeroes: actions.getHeroes, searchHeroe: actions.searchHeroe
+})(Home);

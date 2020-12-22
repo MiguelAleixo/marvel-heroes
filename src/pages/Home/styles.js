@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const HomeContainer = styled.section`
     display: flex;
@@ -7,13 +7,13 @@ export const HomeContainer = styled.section`
     flex-wrap: wrap;
     max-width: 992px;
     margin: auto;
-`
+`;
 
 export const HeroesContainer = styled.div`
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-`
+`;
 
 export const Title = styled.h1`
     font-family: 'Work Sans', sans-serif;
@@ -21,7 +21,7 @@ export const Title = styled.h1`
     margin: 4px 0;
     font-size: 28px;
     color: #404040;
-`
+`;
 
 export const SubTitle = styled.p`
     font-family: 'Work Sans', sans-serif;
@@ -30,6 +30,6 @@ export const SubTitle = styled.p`
     text-align: center;
     font-size: 14px;
     color: #8C8C8C;
-`
+`;
 
-export const MarvelLogo = styled.img``
+export const MarvelLogo = styled.img``;

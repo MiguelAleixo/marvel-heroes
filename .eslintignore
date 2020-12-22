@@ -1,0 +1,7 @@
+**/node_modules/
+**/stories/
+**/lib/proa-react/
+**/coverage/
+**/mock-server/
+**/builds/
+.eslintrc.js

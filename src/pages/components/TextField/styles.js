@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const FlexContainer = styled.div`
     display: flex;
@@ -6,7 +6,7 @@ export const FlexContainer = styled.div`
     border-radius: 25px;
     margin: 46px auto;
     width: 620px;
-`
+`;
 
 export const Input = styled.input.attrs({ type: 'text' })`
     font-family: 'Work Sans', sans-serif;
@@ -21,9 +21,9 @@ export const Input = styled.input.attrs({ type: 'text' })`
         color: #FF1511;
         opacity: 0.6;
     }
-`
+`;
 
 export const Icon = styled.img`
     width: 18px;
     margin: 0 22px 0 16px;
-`
+`;
