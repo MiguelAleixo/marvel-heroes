@@ -7,15 +7,22 @@ export const Container = styled.div`
     margin: 24px;
     border-radius: 4px;
     overflow: hidden;
-    transition: 0.3s;
-    &:hover {
-        box-shadow: 0 5px 10px #B9B9B9;
-    }
 `;
 
 export const Photo = styled.img`
     width: 100%;
     height: 196px;
+    border-bottom: 4px solid #FF1510;
+    transition: 0.3s;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.1)
+  }
+`;
+
+export const PhotoContainer = styled.div`
+    max-height: 196px;
+    overflow: hidden;
     border-bottom: 4px solid #FF1510;
 `;
 
@@ -30,9 +37,15 @@ export const Name = styled.h2`
     font-size: 16px;
     color: #404040;
     margin: 0 8px;
+    text-overflow: ellipsis
 `;
 
 export const Icon = styled.img`
     margin: 0 8px;
     width: 16px;
+    transition: 0.3s;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.1)
+    }
 `;

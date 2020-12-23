@@ -5,3 +5,4 @@
 **/mock-server/
 **/builds/
 .eslintrc.js
+**/src/

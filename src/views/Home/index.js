@@ -7,6 +7,7 @@ import {
 import logo from '../../assets/logo/marvel.png';
 import TextField from '../components/TextField';
 import Hero from '../components/Hero';
+import Filters from '../components/Filters';
 import * as actions from './actions';
 
 class Home extends React.Component {
@@ -22,8 +23,8 @@ class Home extends React.Component {
   }
 
   getHeroes = () => {
-    const { getHeroes } = this.props;
-    getHeroes();
+    const { getHeroes, hero: { favorites } } = this.props;
+    getHeroes(favorites);
   }
 
   searchHeroe = value => {
@@ -37,9 +38,20 @@ class Home extends React.Component {
     });
   }
 
-  render() {
-    const { heroes } = this.props;
+  favoriteHero = (id, heroes) => {
+    const { favoriteHero } = this.props;
+    favoriteHero(id, heroes);
 
+  }
+
+  navigate = id => {
+    const { history } = this.props;
+    history.push(`/hero/${id}`);
+  }
+
+  render() {
+    const { heroes, history } = this.props;
+    console.log('NAV', history);
     return (
       <HomeContainer>
         <MarvelLogo src={logo} />
@@ -52,10 +64,17 @@ class Home extends React.Component {
           onChange={(e) => this.searchHeroe(e.target.value)}
           placeholder="Procure por heróis"
         />
+        <Filters />
         <HeroesContainer>
           {
-            !heroes.isRequesting && heroes.content.data && heroes.content.data.results.map(obj => (
-              <Hero name={obj.name} photo={`${obj.thumbnail.path}.${obj.thumbnail.extension}`} />
+            heroes.content.results && heroes.content.results.map(obj => (
+              <Hero
+                onClick={() => this.navigate(obj.id)}
+                onFav={() => this.favoriteHero(obj.id, heroes.content)}
+                name={obj.name}
+                fav={obj.fav}
+                photo={`${obj.thumbnail.path}.${obj.thumbnail.extension}`}
+              />
             ))
           }
         </HeroesContainer>
@@ -66,12 +85,15 @@ class Home extends React.Component {
 
 Home.propTypes = {
   heroes: PropTypes.node.isRequired,
+  history: PropTypes.node.isRequired,
   getHeroes: PropTypes.func.isRequired,
   searchHeroe: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ heroes }) => ({ heroes });
+const mapStateToProps = ({ heroes, hero }) => ({ heroes, hero });
 
 export default connect(mapStateToProps, {
-  getHeroes: actions.getHeroes, searchHeroe: actions.searchHeroe
+  getHeroes: actions.getHeroes,
+  searchHeroe: actions.searchHeroe,
+  favoriteHero: actions.favoriteHero
 })(Home);

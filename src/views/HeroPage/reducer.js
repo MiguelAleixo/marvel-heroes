@@ -1,31 +1,32 @@
 import {
-  GET_HEROES_REQUESTING,
-  GET_HEROES_SUCCESS,
-  GET_HEROES_FAILURE,
+  SET_HERO_REQUESTING,
+  SET_HERO_SUCCESS,
+  SET_HERO_FAILURE
 } from './constants';
 
 export const INITIAL_STATE = {
   isRequesting: false,
   success: false,
   error: false,
-  content: []
+  content: {},
+  favorites: []
 };
 
-export default function heroes(state = INITIAL_STATE, action) {
+export default function hero(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case GET_HEROES_REQUESTING:
+    case SET_HERO_REQUESTING:
       return {
         ...state,
         isRequesting: true
       };
-    case GET_HEROES_SUCCESS:
+    case SET_HERO_SUCCESS:
       return {
         ...state,
+        content: action.payload || {},
         isRequesting: false,
-        content: action.payload || state.content,
         error: false
       };
-    case GET_HEROES_FAILURE:
+    case SET_HERO_FAILURE:
       return {
         ...state,
         isRequesting: false,

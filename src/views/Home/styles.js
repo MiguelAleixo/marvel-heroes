@@ -32,4 +32,7 @@ export const SubTitle = styled.p`
     color: #8C8C8C;
 `;
 
-export const MarvelLogo = styled.img``;
+export const MarvelLogo = styled.img`
+    width: 280px;
+    margin: auto;
+`;

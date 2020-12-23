@@ -12,9 +12,12 @@ export function getHeroes() {
     return api
       .get(`characters?&ts=${KEYS.TS}&apikey=${KEYS.PUBLIC}&hash=${KEYS.HASH}`)
       .then(res => {
+        console.log('res.data.data', res.data.data)
+        // let heroes = res.data.data.results
+        // heroes.map(hero => (hero.fav = false))
         dispach({
           type: GET_HEROES_SUCCESS,
-          payload: res.data
+          payload: res.data.data
         });
       })
       .catch(err => {
@@ -35,7 +38,7 @@ export function searchHeroe(value) {
       .then(res => {
         dispach({
           type: GET_HEROES_SUCCESS,
-          payload: res.data
+          payload: res.data.data
         });
       })
       .catch(err => {
@@ -44,5 +47,22 @@ export function searchHeroe(value) {
           payload: err
         });
       });
+  };
+}
+
+export function favoriteHero(id, heroes) {
+  return dispach => {
+    dispach({ type: GET_HEROES_REQUESTING });
+    let chosen = heroes.results.find(hero => hero.id == id)
+    chosen.fav = !chosen.fav;
+    dispach({
+      type: GET_HEROES_SUCCESS,
+      payload: heroes
+    });
+
+    // dispach({
+    //   type: GET_HEROES_FAILURE,
+    //   payload: err
+    // });
   };
 }

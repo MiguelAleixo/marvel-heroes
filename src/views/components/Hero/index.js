@@ -1,20 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Photo, Name, Container, FlexContainer, Icon,
+  Photo, PhotoContainer, Name, Container, FlexContainer, Icon,
 } from './styles';
 import heart from '../../../assets/icones/heart/heart.svg';
 import emptyHeart from '../../../assets/icones/heart/empty-heart.svg';
 
-function Hero({ photo, name }) {
+function Hero({ photo, name, onClick, onFav, fav }) {
   return (
     <Container>
-      <Photo src={photo} />
+      <PhotoContainer>
+        <Photo onClick={onClick} src={photo} />
+      </PhotoContainer>
       <FlexContainer>
         <Name>
           {name}
         </Name>
-        <Icon src={false ? heart : emptyHeart} />
+        <Icon onClick={onFav} src={fav ? heart : emptyHeart} />
       </FlexContainer>
     </Container>
   );
@@ -22,7 +24,8 @@ function Hero({ photo, name }) {
 
 Hero.propTypes = {
   photo: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired
 };
 
 export default Hero;
