@@ -2,19 +2,22 @@ import {
   GET_HEROES_REQUESTING,
   GET_HEROES_SUCCESS,
   GET_HEROES_FAILURE,
+  FAV_HERO_REQUESTING,
+  FAV_HERO_SUCCESS,
+  FAV_HERO_FAILURE
 } from './constants';
 import api from '../../providers/api';
 import { KEYS } from '../../constants/keys';
 
-export function getHeroes() {
+export function getHeroes(favorites) {
   return dispach => {
     dispach({ type: GET_HEROES_REQUESTING });
     return api
       .get(`characters?&ts=${KEYS.TS}&apikey=${KEYS.PUBLIC}&hash=${KEYS.HASH}`)
       .then(res => {
-        console.log('res.data.data', res.data.data)
-        // let heroes = res.data.data.results
-        // heroes.map(hero => (hero.fav = false))
+        favorites.map(item => {
+          res.data.data.results.find(hero => hero.id === item).fav = true;
+        })
         dispach({
           type: GET_HEROES_SUCCESS,
           payload: res.data.data
@@ -29,13 +32,18 @@ export function getHeroes() {
   };
 }
 
-export function searchHeroe(value) {
+export function searchHeroe(value, favorites) {
   const params = value ? `nameStartsWith=${value}` : '';
   return dispach => {
     dispach({ type: GET_HEROES_REQUESTING });
     return api
       .get(`characters?${params}&ts=${KEYS.TS}&apikey=${KEYS.PUBLIC}&hash=${KEYS.HASH}`)
       .then(res => {
+        favorites.map(item => {
+          if (res.data.data.results.find(hero => hero.id === item)) {
+            res.data.data.results.find(hero => hero.id === item).fav = true;
+          }
+        })
         dispach({
           type: GET_HEROES_SUCCESS,
           payload: res.data.data
@@ -52,17 +60,12 @@ export function searchHeroe(value) {
 
 export function favoriteHero(id, heroes) {
   return dispach => {
-    dispach({ type: GET_HEROES_REQUESTING });
-    let chosen = heroes.results.find(hero => hero.id == id)
+    dispach({ type: FAV_HERO_REQUESTING });
+    let chosen = heroes.content.results.find(hero => hero.id == id)
     chosen.fav = !chosen.fav;
     dispach({
-      type: GET_HEROES_SUCCESS,
-      payload: heroes
+      type: FAV_HERO_SUCCESS,
+      payload: id
     });
-
-    // dispach({
-    //   type: GET_HEROES_FAILURE,
-    //   payload: err
-    // });
   };
 }

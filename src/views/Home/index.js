@@ -23,17 +23,17 @@ class Home extends React.Component {
   }
 
   getHeroes = () => {
-    const { getHeroes, hero: { favorites } } = this.props;
+    const { getHeroes, heroes: { favorites }  } = this.props;
     getHeroes(favorites);
   }
 
   searchHeroe = value => {
     const { timeout } = this.state;
-    const { searchHeroe } = this.props;
+    const { searchHeroe, heroes: { favorites } } = this.props;
     clearTimeout(timeout);
     this.setState({
       timeout: setTimeout(() => {
-        searchHeroe(value);
+        searchHeroe(value, favorites);
       }, 1000)
     });
   }
@@ -51,7 +51,6 @@ class Home extends React.Component {
 
   render() {
     const { heroes, history } = this.props;
-    console.log('NAV', history);
     return (
       <HomeContainer>
         <MarvelLogo src={logo} />
@@ -64,13 +63,13 @@ class Home extends React.Component {
           onChange={(e) => this.searchHeroe(e.target.value)}
           placeholder="Procure por heróis"
         />
-        <Filters />
+        <Filters onClick={() => console.log('foi')}/>
         <HeroesContainer>
           {
             heroes.content.results && heroes.content.results.map(obj => (
               <Hero
                 onClick={() => this.navigate(obj.id)}
-                onFav={() => this.favoriteHero(obj.id, heroes.content)}
+                onFav={() => this.favoriteHero(obj.id, heroes)}
                 name={obj.name}
                 fav={obj.fav}
                 photo={`${obj.thumbnail.path}.${obj.thumbnail.extension}`}

@@ -6,15 +6,13 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import Home from './views/Home';
 import HeroPage from './views/HeroPage';
-import heroes from './views/modules/home/reducer';
-import hero from './views/modules/hero-page/reducer';
-import favorite from './views/modules/favorite/reducer';
+import heroes from './views/Home/reducer';
+import hero from './views/HeroPage/reducer';
 
 const store = createStore(
   combineReducers({
     heroes,
-    hero,
-    favorite
+    hero
   }),
   applyMiddleware(logger, thunk),
 );
