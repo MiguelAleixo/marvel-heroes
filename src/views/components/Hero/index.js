@@ -6,7 +6,9 @@ import {
 import heart from '../../../assets/icones/heart/heart.svg';
 import emptyHeart from '../../../assets/icones/heart/empty-heart.svg';
 
-function Hero({ photo, name, onClick, onFav, fav }) {
+function Hero({
+  photo, name, onClick, onFav, fav
+}) {
   return (
     <Container>
       <PhotoContainer>

@@ -14,7 +14,8 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      timeout: null
+      timeout: null,
+      onlyFav: false
     };
   }
 
@@ -23,7 +24,7 @@ class Home extends React.Component {
   }
 
   getHeroes = () => {
-    const { getHeroes, heroes: { favorites }  } = this.props;
+    const { getHeroes, heroes: { favorites } } = this.props;
     getHeroes(favorites);
   }
 
@@ -38,10 +39,17 @@ class Home extends React.Component {
     });
   }
 
+
   favoriteHero = (id, heroes) => {
     const { favoriteHero } = this.props;
     favoriteHero(id, heroes);
+  }
 
+  filterHeroes = () => {
+    const { onlyFav } = this.state;
+    this.setState({
+      onlyFav: !onlyFav
+    })
   }
 
   navigate = id => {
@@ -51,6 +59,7 @@ class Home extends React.Component {
 
   render() {
     const { heroes, history } = this.props;
+    const { onlyFav } = this.state;
     return (
       <HomeContainer>
         <MarvelLogo src={logo} />
@@ -63,18 +72,26 @@ class Home extends React.Component {
           onChange={(e) => this.searchHeroe(e.target.value)}
           placeholder="Procure por heróis"
         />
-        <Filters onClick={() => console.log('foi')}/>
+        <Filters onlyFav={onlyFav} onClick={() => this.filterHeroes()} />
         <HeroesContainer>
           {
-            heroes.content.results && heroes.content.results.map(obj => (
+            !onlyFav ? (heroes.content.results && heroes.content.results.map(obj => (
               <Hero
                 onClick={() => this.navigate(obj.id)}
-                onFav={() => this.favoriteHero(obj.id, heroes)}
+                onFav={() => this.favoriteHero(obj, heroes)}
                 name={obj.name}
                 fav={obj.fav}
                 photo={`${obj.thumbnail.path}.${obj.thumbnail.extension}`}
               />
-            ))
+            ))) : (heroes && heroes.favorites.map(obj => (
+              <Hero
+                onClick={() => this.navigate(obj.id)}
+                onFav={() => this.favoriteHero(obj, heroes)}
+                name={obj.name}
+                fav={obj.fav}
+                photo={`${obj.thumbnail.path}.${obj.thumbnail.extension}`}
+              />
+            )))
           }
         </HeroesContainer>
       </HomeContainer>

@@ -7,10 +7,6 @@ import * as actions from './actions';
 import { favoriteHero } from '../Home/actions';
 
 class HeroPage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount = () => {
     this.setHero();
   }
@@ -33,13 +29,9 @@ class HeroPage extends React.Component {
     const {
       favoriteHero,
       heroes,
-      match: {
-        params: {
-          id
-        }
-      }
+      hero
     } = this.props;
-    favoriteHero(id, heroes.content);
+    favoriteHero(hero.content, heroes);
   }
 
   render() {
@@ -66,5 +58,5 @@ const mapStateToProps = ({ hero, heroes }) => ({ hero, heroes });
 
 export default connect(mapStateToProps, {
   setHero: actions.setHero,
-  favoriteHero: favoriteHero
+  favoriteHero
 })(HeroPage);

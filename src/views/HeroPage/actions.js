@@ -8,16 +8,16 @@ export function setHero(id, heroes, history) {
   return dispach => {
     dispach({ type: SET_HERO_REQUESTING });
     if (heroes.content.results) {
-      let payload = heroes.content.results.find(hero => hero.id == id);
+      const payload = heroes.content.results.find(hero => hero.id === +id);
       dispach({
         type: SET_HERO_SUCCESS,
         payload
       });
     } else {
-      history.push('/')
+      history.push('/');
       dispach({
         type: SET_HERO_FAILURE
       });
     }
   };
-};
+}

@@ -8,12 +8,12 @@ import left from '../../../assets/toggle/left.svg';
 import hero from '../../../assets/icones/heroi/hero.svg';
 import heart from '../../../assets/icones/heart/heart.svg';
 
-function Filters({ onClick }) {
+function Filters({ onClick, onlyFav }) {
   return (
     <Container>
       <Icon src={hero} />
       <Text> Ordenar por nome - A/Z </Text>
-      <Toggle src={left} onClick={onClick} />
+      <Toggle src={onlyFav ? right : left} onClick={onClick} />
       <Icon src={heart} />
       <Text> Somente favoritos </Text>
     </Container>

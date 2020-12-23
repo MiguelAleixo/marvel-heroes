@@ -36,7 +36,6 @@ export const Fav = styled.img`
     cursor: pointer;
 `;
 
-
 export const Icon = styled.img`
     width: 24px;
 `;
@@ -53,11 +52,11 @@ export const FlexContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-`
+`;
 
 export const ItemsContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 
-`
+`;
