@@ -9,7 +9,7 @@ import TextField from '../components/TextField';
 import Hero from '../components/Hero';
 import Filters from '../components/Filters';
 import Loading from '../components/Loading';
-import * as actions from './actions';
+import * as actions from './state/actions';
 
 class Home extends React.Component {
   constructor(props) {

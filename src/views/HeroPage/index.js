@@ -9,8 +9,8 @@ import TextField from '../components/TextField';
 import HeroDetails from '../components/HeroDetails';
 import LastReleases from '../components/LastReleases';
 import Loading from '../components/Loading';
-import * as actions from './actions';
-import * as actionsHome from '../Home/actions';
+import * as actions from './state/actions';
+import * as actionsHome from '../Home/state/actions';
 
 class HeroPage extends React.Component {
   componentDidMount = () => {

@@ -6,8 +6,8 @@ import {
   GET_COMICS_SUCCESS,
   GET_COMICS_FAILURE
 } from './constants';
-import api from '../../providers/api';
-import { KEYS } from '../../constants/keys';
+import api from '../../../providers/api';
+import { KEYS } from '../../../constants/keys';
 
 export function getHero(id, favorites) {
   return dispach => {

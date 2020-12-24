@@ -5,8 +5,8 @@ import {
   FAV_HERO_REQUESTING,
   FAV_HERO_SUCCESS
 } from './constants';
-import api from '../../providers/api';
-import { KEYS } from '../../constants/keys';
+import api from '../../../providers/api';
+import { KEYS } from '../../../constants/keys';
 
 export function getHeroes(favorites) {
   return dispach => {
