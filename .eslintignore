@@ -5,3 +5,5 @@
 **/mock-server/
 **/builds/
 .eslintrc.js
+COMMENTS.md
+README.md

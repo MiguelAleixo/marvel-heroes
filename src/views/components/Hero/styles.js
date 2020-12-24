@@ -47,8 +47,15 @@ export const Icon = styled.img`
     margin: 0 8px;
     width: 10%;
     transition: 0.3s;
-    cursor: pointer;
+    cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
     &:hover {
-      transform: scale(1.1)
+      transform: ${props => (props.disabled ? 'scale(1.0)' : 'scale(1.1)')};
+    }
+    &:disabled {
+      cursor: block;
     }
 `;
+
+// const StyledIcon = styled(Icon)<{ open: boolean }>`
+//    top: ${p => (p.open ? 0 : 100)}%;
+// `;

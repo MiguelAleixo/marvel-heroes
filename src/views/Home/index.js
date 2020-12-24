@@ -8,6 +8,7 @@ import logo from '../../assets/logo/marvel.png';
 import TextField from '../components/TextField';
 import Hero from '../components/Hero';
 import Filters from '../components/Filters';
+import Loading from '../components/Loading';
 import * as actions from './actions';
 
 class Home extends React.Component {
@@ -15,8 +16,11 @@ class Home extends React.Component {
     super(props);
     this.state = {
       timeout: null,
-      onlyFav: false
+      onlyFav: false,
+      search: ''
     };
+
+    this.changeHandler = this.changeHandler.bind(this);
   }
 
   componentDidMount = () => {
@@ -39,6 +43,12 @@ class Home extends React.Component {
     });
   }
 
+  changeHandler = e => {
+    this.setState({
+      search: e.target.value,
+    }, () => this.searchHeroe(e.target.value));
+  }
+
   favoriteHero = (id, heroes) => {
     const { favoriteHero } = this.props;
     favoriteHero(id, heroes);
@@ -46,8 +56,12 @@ class Home extends React.Component {
 
   filterHeroes = () => {
     const { onlyFav } = this.state;
+    const { getHeroes, heroes: { favorites } } = this.props;
     this.setState({
-      onlyFav: !onlyFav
+      onlyFav: !onlyFav,
+      search: ''
+    }, () => {
+      getHeroes(favorites);
     });
   }
 
@@ -58,7 +72,7 @@ class Home extends React.Component {
 
   render() {
     const { heroes } = this.props;
-    const { onlyFav } = this.state;
+    const { onlyFav, search } = this.state;
     return (
       <HomeContainer>
         <MarvelLogo src={logo} />
@@ -68,31 +82,34 @@ class Home extends React.Component {
           - e aqueles que você descobrirá em breve!
         </SubTitle>
         <TextField
-          onChange={(e) => this.searchHeroe(e.target.value)}
+          value={search}
+          disabled={onlyFav}
+          onChange={this.changeHandler}
           placeholder="Procure por heróis"
         />
         <Filters onlyFav={onlyFav} onClick={() => this.filterHeroes()} />
-        <HeroesContainer>
-          {
-            !onlyFav ? (heroes.content.results && heroes.content.results.map(obj => (
-              <Hero
-                onClick={() => this.navigate(obj.id)}
-                onFav={() => this.favoriteHero(obj, heroes)}
-                name={obj.name}
-                fav={obj.fav}
-                photo={`${obj.thumbnail.path}.${obj.thumbnail.extension}`}
-              />
-            ))) : (heroes && heroes.favorites.map(obj => (
-              <Hero
-                onClick={() => this.navigate(obj.id)}
-                onFav={() => this.favoriteHero(obj, heroes)}
-                name={obj.name}
-                fav={obj.fav}
-                photo={`${obj.thumbnail.path}.${obj.thumbnail.extension}`}
-              />
-            )))
-          }
-        </HeroesContainer>
+        { !heroes.isRequesting ? (
+          <HeroesContainer>
+            {
+              !onlyFav ? (heroes.content.results.map(obj => (
+                <Hero
+                  onClick={() => this.navigate(obj.id)}
+                  onFav={() => this.favoriteHero(obj, heroes)}
+                  favorites={heroes.favorites}
+                  hero={obj}
+                />
+              ))) : (heroes.favorites.map(obj => (
+                <Hero
+                  onClick={() => this.navigate(obj.id)}
+                  onFav={() => this.favoriteHero(obj, heroes)}
+                  favorites={heroes.favorites}
+                  hero={obj}
+                />
+              )))
+            }
+          </HeroesContainer>
+        ) : <Loading />
+        }
       </HomeContainer>
     );
   }
@@ -100,15 +117,18 @@ class Home extends React.Component {
 
 Home.propTypes = {
   heroes: PropTypes.shape({
+    isRequesting: PropTypes.bool.isRequired,
     content: PropTypes.shape({
       results: PropTypes.array.isRequired
     }).isRequired,
     favorites: PropTypes.array.isRequired
   }).isRequired,
-  history: PropTypes.node.isRequired,
   getHeroes: PropTypes.func.isRequired,
   searchHeroe: PropTypes.func.isRequired,
-  favoriteHero: PropTypes.func.isRequired
+  favoriteHero: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired
 };
 
 const mapStateToProps = ({ heroes, hero }) => ({ heroes, hero });

@@ -11,8 +11,12 @@ export const INITIAL_STATE = {
   isRequesting: false,
   success: false,
   error: false,
-  content: {},
-  comics: {}
+  content: {
+    results: []
+  },
+  comics: {
+    results: []
+  }
 };
 
 export default function hero(state = INITIAL_STATE, action) {

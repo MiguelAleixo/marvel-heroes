@@ -4,17 +4,18 @@ import { Input, FlexContainer, Icon } from './styles';
 import search from '../../../assets/busca/Lupa/search.svg';
 
 function TextField({
-  placeholder, onChange, color, disabled
+  value, placeholder, onChange, color, disabled
 }) {
   return (
     <FlexContainer style={{ backgroundColor: color }}>
       <Icon src={search} />
-      <Input disabled={disabled} onChange={onChange} placeholder={placeholder} />
+      <Input value={value} disabled={disabled} onChange={onChange} placeholder={placeholder} />
     </FlexContainer>
   );
 }
 
 TextField.propTypes = {
+  value: PropTypes.any,
   placeholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   color: PropTypes.string,

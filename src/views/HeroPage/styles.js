@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Header = styled.header`
     width: 100%;
     display: flex;
-    background-color: #E7F6E7;
 `;
 
 export const Container = styled.section`
@@ -14,6 +13,7 @@ export const Container = styled.section`
 export const MarvelLogo = styled.img`
     width: 180px;
     margin: auto;
+    cursor: pointer;
 `;
 
 export const HeroPageContainer = styled.div`

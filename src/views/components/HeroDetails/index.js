@@ -6,15 +6,21 @@ import {
 import InfoTable from '../InfoTable';
 import heart from '../../../assets/icones/heart/heart.svg';
 import emptyHeart from '../../../assets/icones/heart/empty-heart.svg';
+import Loading from '../Loading';
+import { setDisabled } from '../../../utils/setDisabled';
 
-function HeroDetails({ hero, onFav }) {
+function HeroDetails({ hero, favorites, onFav }) {
   return (
     hero ? (
       <Container>
         <DetailsContainer>
           <TitleContainer>
-            <Title> {hero.name} </Title>
-            <Fav onClick={onFav} src={hero.fav ? heart : emptyHeart} />
+            <Title> {hero.name || '-'} </Title>
+            <Fav
+              onClick={setDisabled(favorites, hero.fav) ? null : onFav}
+              src={hero.fav ? heart : emptyHeart}
+              disabled={setDisabled(favorites, hero.fav)}
+            />
           </TitleContainer>
           <Description> {hero.description || '-'} </Description>
           <InfoTable comics={hero.comics.available} movies={hero.series.available} />
@@ -23,7 +29,7 @@ function HeroDetails({ hero, onFav }) {
           <HeroImage src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`} />
         </ImageContainer>
       </Container>
-    ) : <></>
+    ) : <Loading />
   );
 }
 
@@ -43,6 +49,7 @@ HeroDetails.propTypes = {
       extension: PropTypes.string.isRequired
     }).isRequired,
   }).isRequired,
+  favorites: PropTypes.bool,
   onFav: PropTypes.func.isRequired
 };
 

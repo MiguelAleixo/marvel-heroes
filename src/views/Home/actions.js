@@ -15,7 +15,9 @@ export function getHeroes(favorites) {
       .get(`characters?&ts=${KEYS.TS}&apikey=${KEYS.PUBLIC}&hash=${KEYS.HASH}`)
       .then(res => {
         favorites.forEach(item => {
-          res.data.data.results.find(hero => hero.id === item.id).fav = true;
+          if (res.data.data.results.find(hero => hero.id === item.id)) {
+            res.data.data.results.find(hero => hero.id === item.id).fav = true;
+          }
         });
         dispach({
           type: GET_HEROES_SUCCESS,

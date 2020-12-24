@@ -7,16 +7,14 @@ import Comics from '../Comics';
 
 function LastReleases({ comics }) {
   return (
-    comics ? (
-      <Container>
-        <Title> Ultimos lançamentos </Title>
-        <ComicsContainer>
-          {
-            comics.map(obj => (<Comics comic={obj} />))
-          }
-        </ComicsContainer>
-      </Container>
-    ) : <></>
+    <Container>
+      <Title> Ultimos lançamentos </Title>
+      <ComicsContainer>
+        {
+          comics.map(obj => (<Comics comic={obj} />))
+        }
+      </ComicsContainer>
+    </Container>
   );
 }
 

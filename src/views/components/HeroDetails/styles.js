@@ -41,7 +41,7 @@ export const TitleContainer = styled.div`
 
 export const Fav = styled.img`
     width: 10%;
-    cursor: pointer;
+    cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
 `;
 
 export const Description = styled.p`

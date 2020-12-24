@@ -11,7 +11,9 @@ export const INITIAL_STATE = {
   isRequesting: false,
   success: false,
   error: false,
-  content: {},
+  content: {
+    results: []
+  },
   favorites: []
 };
 
@@ -43,8 +45,8 @@ export default function heroes(state = INITIAL_STATE, action) {
     case FAV_HERO_SUCCESS:
       return {
         ...state,
-        favorites: state.favorites.includes(action.payload)
-          ? [...state.favorites.filter(i => i !== action.payload)]
+        favorites: state.favorites.some(obj => obj.id === action.payload.id)
+          ? [...state.favorites.filter(i => i.id !== action.payload.id)]
           : [...state.favorites, action.payload],
         isRequesting: false,
         error: false
