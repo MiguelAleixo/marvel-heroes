@@ -59,13 +59,18 @@ export function searchHeroe(value, favorites) {
   };
 }
 
-export function favoriteHero(hero) {
+export function favoriteHero(hero, favorites) {
   return dispach => {
     dispach({ type: FAV_HERO_REQUESTING });
     hero.fav = !hero.fav;
+
+    const payload = favorites.some(obj => obj.id === hero.id)
+      ? [...favorites.filter(i => i.id !== hero.id)]
+      : [...favorites, hero];
+
     dispach({
       type: FAV_HERO_SUCCESS,
-      payload: hero
+      payload
     });
   };
 }

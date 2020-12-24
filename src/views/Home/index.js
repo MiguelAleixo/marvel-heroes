@@ -49,9 +49,9 @@ class Home extends React.Component {
     }, () => this.searchHeroe(e.target.value));
   }
 
-  favoriteHero = (id, heroes) => {
-    const { favoriteHero } = this.props;
-    favoriteHero(id, heroes);
+  favoriteHero = hero => {
+    const { favoriteHero, heroes: { favorites } } = this.props;
+    favoriteHero(hero, favorites);
   }
 
   filterHeroes = () => {
@@ -94,14 +94,14 @@ class Home extends React.Component {
               !onlyFav ? (heroes.content.results.map(obj => (
                 <Hero
                   onClick={() => this.navigate(obj.id)}
-                  onFav={() => this.favoriteHero(obj, heroes)}
+                  onFav={() => this.favoriteHero(obj)}
                   favorites={heroes.favorites}
                   hero={obj}
                 />
               ))) : (heroes.favorites.map(obj => (
                 <Hero
                   onClick={() => this.navigate(obj.id)}
-                  onFav={() => this.favoriteHero(obj, heroes)}
+                  onFav={() => this.favoriteHero(obj)}
                   favorites={heroes.favorites}
                   hero={obj}
                 />

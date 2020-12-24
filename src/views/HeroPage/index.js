@@ -46,9 +46,12 @@ class HeroPage extends React.Component {
   favoriteHero = () => {
     const {
       favoriteHero,
-      hero
+      hero,
+      heroes: {
+        favorites
+      }
     } = this.props;
-    favoriteHero(hero.content.results[0]);
+    favoriteHero(hero.content.results[0], favorites);
   }
 
   navigate = () => {

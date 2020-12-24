@@ -45,9 +45,7 @@ export default function heroes(state = INITIAL_STATE, action) {
     case FAV_HERO_SUCCESS:
       return {
         ...state,
-        favorites: state.favorites.some(obj => obj.id === action.payload.id)
-          ? [...state.favorites.filter(i => i.id !== action.payload.id)]
-          : [...state.favorites, action.payload],
+        favorites: action.payload,
         isRequesting: false,
         error: false
       };
