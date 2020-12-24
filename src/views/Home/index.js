@@ -39,7 +39,6 @@ class Home extends React.Component {
     });
   }
 
-
   favoriteHero = (id, heroes) => {
     const { favoriteHero } = this.props;
     favoriteHero(id, heroes);
@@ -49,7 +48,7 @@ class Home extends React.Component {
     const { onlyFav } = this.state;
     this.setState({
       onlyFav: !onlyFav
-    })
+    });
   }
 
   navigate = id => {
@@ -58,7 +57,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { heroes, history } = this.props;
+    const { heroes } = this.props;
     const { onlyFav } = this.state;
     return (
       <HomeContainer>
@@ -100,10 +99,16 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-  heroes: PropTypes.node.isRequired,
+  heroes: PropTypes.shape({
+    content: PropTypes.shape({
+      results: PropTypes.array.isRequired
+    }).isRequired,
+    favorites: PropTypes.array.isRequired
+  }).isRequired,
   history: PropTypes.node.isRequired,
   getHeroes: PropTypes.func.isRequired,
-  searchHeroe: PropTypes.func.isRequired
+  searchHeroe: PropTypes.func.isRequired,
+  favoriteHero: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ heroes, hero }) => ({ heroes, hero });

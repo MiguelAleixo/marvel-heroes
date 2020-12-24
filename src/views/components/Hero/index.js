@@ -27,7 +27,9 @@ function Hero({
 Hero.propTypes = {
   photo: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired
+  fav: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onFav: PropTypes.func.isRequired
 };
 
 export default Hero;

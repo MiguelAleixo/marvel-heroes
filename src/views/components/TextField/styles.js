@@ -5,7 +5,8 @@ export const FlexContainer = styled.div`
     background-color: #FDECEC;
     border-radius: 25px;
     margin: 46px auto;
-    width: 620px;
+    max-width: 100%;
+    width: 780px;
 `;
 
 export const Input = styled.input.attrs({ type: 'text' })`

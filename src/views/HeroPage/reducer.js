@@ -1,7 +1,10 @@
 import {
-  SET_HERO_REQUESTING,
-  SET_HERO_SUCCESS,
-  SET_HERO_FAILURE
+  GET_HERO_REQUESTING,
+  GET_HERO_SUCCESS,
+  GET_HERO_FAILURE,
+  GET_COMICS_REQUESTING,
+  GET_COMICS_SUCCESS,
+  GET_COMICS_FAILURE
 } from './constants';
 
 export const INITIAL_STATE = {
@@ -9,24 +12,42 @@ export const INITIAL_STATE = {
   success: false,
   error: false,
   content: {},
-  favorites: []
+  comics: {}
 };
 
 export default function hero(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case SET_HERO_REQUESTING:
+    case GET_HERO_REQUESTING:
       return {
         ...state,
         isRequesting: true
       };
-    case SET_HERO_SUCCESS:
+    case GET_HERO_SUCCESS:
       return {
         ...state,
         content: action.payload || {},
         isRequesting: false,
         error: false
       };
-    case SET_HERO_FAILURE:
+    case GET_HERO_FAILURE:
+      return {
+        ...state,
+        isRequesting: false,
+        error: true
+      };
+    case GET_COMICS_REQUESTING:
+      return {
+        ...state,
+        isRequesting: true
+      };
+    case GET_COMICS_SUCCESS:
+      return {
+        ...state,
+        comics: action.payload || {},
+        isRequesting: false,
+        error: false
+      };
+    case GET_COMICS_FAILURE:
       return {
         ...state,
         isRequesting: false,

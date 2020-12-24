@@ -1,62 +1,101 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Title, HeroPageContainer, HeroImage } from './styles';
-import HeroDetail from '../components/HeroDetail';
+import {
+  HeroPageContainer, Container, Header, MarvelLogo
+} from './styles';
+import logo from '../../assets/logo/marvel.png';
+import TextField from '../components/TextField';
+import HeroDetails from '../components/HeroDetails';
+import LastReleases from '../components/LastReleases';
 import * as actions from './actions';
-import { favoriteHero } from '../Home/actions';
+import * as actionsHome from '../Home/actions';
 
 class HeroPage extends React.Component {
   componentDidMount = () => {
-    this.setHero();
+    this.getHero();
+    this.getComics();
   }
 
-  setHero = () => {
+  getHero = () => {
     const {
-      setHero,
-      heroes,
-      history,
+      getHero,
+      heroes: { favorites },
       match: {
         params: {
           id
         }
       }
     } = this.props;
-    setHero(id, heroes, history);
+    getHero(id, favorites);
+  }
+
+  getComics = () => {
+    const {
+      getComics,
+      match: {
+        params: {
+          id
+        }
+      }
+    } = this.props;
+    getComics(id);
   }
 
   favoriteHero = () => {
     const {
       favoriteHero,
-      heroes,
       hero
     } = this.props;
-    favoriteHero(hero.content, heroes);
+    favoriteHero(hero.content.results[0]);
   }
 
   render() {
     const { hero } = this.props;
     return (
-      <>
-        <Title>
-          Detalhes do personagi
-        </Title>
+      <Container>
         <HeroPageContainer>
-          <HeroDetail onFav={() => this.favoriteHero()} hero={hero.content} />
-          <HeroImage src={`${hero.content.thumbnail && hero.content.thumbnail.path}.${hero.content.thumbnail && hero.content.thumbnail.extension}`} />
+          <Header>
+            <MarvelLogo src={logo} />
+            <TextField disabled placeholder="Procure por heróis" color="#FFFF" />
+          </Header>
+          <HeroDetails
+            onFav={() => this.favoriteHero()}
+            hero={hero.content.results && hero.content.results[0]}
+          />
+          <LastReleases comics={hero.comics.results} />
         </HeroPageContainer>
-      </>
+      </Container>
     );
   }
 }
 
 HeroPage.propTypes = {
-  hero: PropTypes.node
+  hero: PropTypes.shape({
+    content: PropTypes.shape({
+      results: PropTypes.array.isRequired
+    }).isRequired,
+    comics: PropTypes.shape({
+      results: PropTypes.array.isRequired
+    }).isRequired
+  }).isRequired,
+  heroes: PropTypes.shape({
+    favorites: PropTypes.array.isRequired
+  }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired,
+  getHero: PropTypes.func.isRequired,
+  getComics: PropTypes.func.isRequired,
+  favoriteHero: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ hero, heroes }) => ({ hero, heroes });
 
 export default connect(mapStateToProps, {
-  setHero: actions.setHero,
-  favoriteHero
+  getHero: actions.getHero,
+  getComics: actions.getComics,
+  favoriteHero: actionsHome.favoriteHero
 })(HeroPage);

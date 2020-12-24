@@ -9,17 +9,14 @@ import api from '../../providers/api';
 import { KEYS } from '../../constants/keys';
 
 export function getHeroes(favorites) {
-  console.log('roda isso aqui')
   return dispach => {
     dispach({ type: GET_HEROES_REQUESTING });
     return api
       .get(`characters?&ts=${KEYS.TS}&apikey=${KEYS.PUBLIC}&hash=${KEYS.HASH}`)
       .then(res => {
-        console.log('seta', favorites)
-        favorites.map(item => {
+        favorites.forEach(item => {
           res.data.data.results.find(hero => hero.id === item.id).fav = true;
         });
-        console.log('PRECISA VIR AASSIM', res.data.data)
         dispach({
           type: GET_HEROES_SUCCESS,
           payload: res.data.data
@@ -41,12 +38,11 @@ export function searchHeroe(value, favorites) {
     return api
       .get(`characters?${params}&ts=${KEYS.TS}&apikey=${KEYS.PUBLIC}&hash=${KEYS.HASH}`)
       .then(res => {
-        favorites.map(item => {
+        favorites.forEach(item => {
           if (res.data.data.results.find(hero => hero.id === item.id)) {
             res.data.data.results.find(hero => hero.id === item.id).fav = true;
           }
         });
-        console.log('PRECISA VIR AASSIM', res.data.data)
         dispach({
           type: GET_HEROES_SUCCESS,
           payload: res.data.data
@@ -61,17 +57,13 @@ export function searchHeroe(value, favorites) {
   };
 }
 
-export function favoriteHero(chosen, heroes) {
+export function favoriteHero(hero) {
   return dispach => {
-    console.log('CHOSEN', chosen)
-    console.log('HEROES', heroes)
     dispach({ type: FAV_HERO_REQUESTING });
-    const payload = heroes.content.results.find(hero => hero.id == chosen.id);
-    console.log('PAYLOAD', payload)
-    payload.fav = !payload.fav;
+    hero.fav = !hero.fav;
     dispach({
       type: FAV_HERO_SUCCESS,
-      payload: payload
+      payload: hero
     });
   };
 }

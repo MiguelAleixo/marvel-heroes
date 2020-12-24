@@ -21,8 +21,7 @@ function Filters({ onClick, onlyFav }) {
 }
 
 Filters.propTypes = {
-  photo: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  onlyFav: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired
 };
 

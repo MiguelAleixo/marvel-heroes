@@ -30,19 +30,22 @@ export const FlexContainer = styled.div`
     display: flex;
     justify-content: space-between;
     margin: 16px 0;
+    white-space: nowrap;
 `;
 
 export const Name = styled.h2`
+    width: 90%;
     font-family: 'Work Sans', sans-serif;
     font-size: 16px;
     color: #404040;
     margin: 0 8px;
-    text-overflow: ellipsis
+    text-overflow: ellipsis;
+    overflow: hidden;
 `;
 
 export const Icon = styled.img`
     margin: 0 8px;
-    width: 16px;
+    width: 10%;
     transition: 0.3s;
     cursor: pointer;
     &:hover {

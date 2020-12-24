@@ -1,23 +1,53 @@
 import {
-  SET_HERO_REQUESTING,
-  SET_HERO_SUCCESS,
-  SET_HERO_FAILURE
+  GET_HERO_REQUESTING,
+  GET_HERO_SUCCESS,
+  GET_HERO_FAILURE,
+  GET_COMICS_REQUESTING,
+  GET_COMICS_SUCCESS,
+  GET_COMICS_FAILURE
 } from './constants';
+import api from '../../providers/api';
+import { KEYS } from '../../constants/keys';
 
-export function setHero(id, heroes, history) {
+export function getHero(id, favorites) {
   return dispach => {
-    dispach({ type: SET_HERO_REQUESTING });
-    if (heroes.content.results) {
-      const payload = heroes.content.results.find(hero => hero.id === +id);
-      dispach({
-        type: SET_HERO_SUCCESS,
-        payload
+    dispach({ type: GET_HERO_REQUESTING });
+    return api
+      .get(`characters/${id}?&ts=${KEYS.TS}&apikey=${KEYS.PUBLIC}&hash=${KEYS.HASH}`)
+      .then(res => {
+        favorites.forEach(item => {
+          res.data.data.results.find(hero => hero.id === item.id).fav = true;
+        });
+        dispach({
+          type: GET_HERO_SUCCESS,
+          payload: res.data.data
+        });
+      })
+      .catch(err => {
+        dispach({
+          type: GET_HERO_FAILURE,
+          payload: err
+        });
       });
-    } else {
-      history.push('/');
-      dispach({
-        type: SET_HERO_FAILURE
+  };
+}
+
+export function getComics(id) {
+  return dispach => {
+    dispach({ type: GET_COMICS_REQUESTING });
+    return api
+      .get(`characters/${id}/comics?&ts=${KEYS.TS}&apikey=${KEYS.PUBLIC}&hash=${KEYS.HASH}`)
+      .then(res => {
+        dispach({
+          type: GET_COMICS_SUCCESS,
+          payload: res.data.data
+        });
+      })
+      .catch(err => {
+        dispach({
+          type: GET_COMICS_FAILURE,
+          payload: err
+        });
       });
-    }
   };
 }
