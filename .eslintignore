@@ -4,6 +4,6 @@
 **/coverage/
 **/mock-server/
 **/builds/
+**/scripts/
+**/__tests__/
 .eslintrc.js
-COMMENTS.md
-README.md
