@@ -68,16 +68,18 @@ class HeroPage extends React.Component {
             <MarvelLogo onClick={() => this.navigate()} src={logo} />
             <TextField disabled placeholder="Procure por heróis" color="#FFFF" />
           </Header>
-          {!hero.isRequesting
+          {!hero.isRequestingHero
             ? (
-              <>
-                <HeroDetails
-                  onFav={() => this.favoriteHero()}
-                  hero={hero.content.results[0]}
-                  favorites={heroes.favorites}
-                />
-                <LastReleases comics={hero.comics.results} />
-              </>
+              <HeroDetails
+                onFav={() => this.favoriteHero()}
+                hero={hero.content.results[0]}
+                favorites={heroes.favorites}
+              />
+            ) : <Loading />
+          }
+          {!hero.isRequestingComics
+            ? (
+              <LastReleases comics={hero.comics.results} />
             ) : <Loading />
           }
         </HeroPageContainer>
@@ -88,7 +90,8 @@ class HeroPage extends React.Component {
 
 HeroPage.propTypes = {
   hero: PropTypes.shape({
-    isRequesting: PropTypes.bool.isRequired,
+    isRequestingHero: PropTypes.bool.isRequired,
+    isRequestingComics: PropTypes.bool.isRequired,
     content: PropTypes.shape({
       results: PropTypes.array.isRequired
     }).isRequired,

@@ -8,7 +8,8 @@ import {
 } from './constants';
 
 export const INITIAL_STATE = {
-  isRequesting: false,
+  isRequestingHero: false,
+  isRequestingComics: false,
   success: false,
   error: false,
   content: {
@@ -24,37 +25,37 @@ export default function hero(state = INITIAL_STATE, action) {
     case GET_HERO_REQUESTING:
       return {
         ...state,
-        isRequesting: true
+        isRequestingHero: true
       };
     case GET_HERO_SUCCESS:
       return {
         ...state,
         content: action.payload || {},
-        isRequesting: false,
+        isRequestingHero: false,
         error: false
       };
     case GET_HERO_FAILURE:
       return {
         ...state,
-        isRequesting: false,
+        isRequestingHero: false,
         error: true
       };
     case GET_COMICS_REQUESTING:
       return {
         ...state,
-        isRequesting: true
+        isRequestingComics: true
       };
     case GET_COMICS_SUCCESS:
       return {
         ...state,
         comics: action.payload || {},
-        isRequesting: false,
+        isRequestingComics: false,
         error: false
       };
     case GET_COMICS_FAILURE:
       return {
         ...state,
-        isRequesting: false,
+        isRequestingComics: false,
         error: true
       };
     default:

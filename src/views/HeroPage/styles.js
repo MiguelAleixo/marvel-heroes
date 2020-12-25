@@ -8,6 +8,7 @@ export const Header = styled.header`
 export const Container = styled.section`
     background-color: #E7F6E7;
     width: 100%;
+    min-height: 63em;
 `;
 
 export const MarvelLogo = styled.img`

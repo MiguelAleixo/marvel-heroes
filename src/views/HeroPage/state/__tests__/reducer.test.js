@@ -11,69 +11,69 @@ import { hero, comics } from '../__mocks__/hero-mocks';
 
 describe('hero: reducer', () => {
   it('should return the initial state', () => {
-    const heroReducer = reducer(undefined, {})
+    const heroReducer = reducer(undefined, {});
 
-    expect(heroReducer).toEqual(INITIAL_STATE)
+    expect(heroReducer).toEqual(INITIAL_STATE);
   });
 
   it('should handle GET_HERO_REQUESTING', () => {
     const heroReducer = reducer(
       INITIAL_STATE,
       { type: GET_HERO_REQUESTING }
-    )
+    );
 
     const expected = {
       ...INITIAL_STATE,
-      isRequesting: true
+      isRequestingHero: true
     };
 
-    expect(heroReducer).toEqual(expected)
+    expect(heroReducer).toEqual(expected);
   });
 
   it('should handle GET_HERO_SUCCESS', () => {
-    const payload = hero
+    const payload = hero;
 
     const heroReducer = reducer(
       INITIAL_STATE,
       { type: GET_HERO_SUCCESS, payload }
-    )
+    );
 
     const expected = {
       ...INITIAL_STATE,
       content: payload,
-      isRequesting: false
-    }
+      isRequestingHero: false
+    };
 
-    expect(heroReducer).toEqual(expected)
-  })
+    expect(heroReducer).toEqual(expected);
+  });
 
   it('should handle GET_HERO_FAILURE', () => {
     const heroReducer = reducer(
       INITIAL_STATE,
       { type: GET_HERO_FAILURE }
-    )
+    );
 
     const expected = {
       ...INITIAL_STATE,
-      isRequesting: false,
+      isRequestingHero: false,
       error: true
-    }
+    };
 
-    expect(heroReducer).toEqual(expected)
-  })
+    expect(heroReducer).toEqual(expected);
+  });
 
   it('should handle GET_COMICS_REQUESTING', () => {
     const heroReducer = reducer(
       INITIAL_STATE,
       { type: GET_COMICS_REQUESTING }
-    )
+    );
 
     const expected = {
       ...INITIAL_STATE,
-      isRequesting: true
+      isRequestingComics: true
     };
 
-    expect(heroReducer).toEqual(expected)
+    expect(heroReducer).toEqual(expected);
   });
 
   it('should handle GET_COMICS_SUCCESS', () => {
@@ -82,30 +82,29 @@ describe('hero: reducer', () => {
     const heroReducer = reducer(
       INITIAL_STATE,
       { type: GET_COMICS_SUCCESS, payload }
-    )
+    );
 
     const expected = {
       ...INITIAL_STATE,
       comics: payload,
-      isRequesting: false
-    }
+      isRequestingComics: false
+    };
 
-    expect(heroReducer).toEqual(expected)
-  })
+    expect(heroReducer).toEqual(expected);
+  });
 
   it('should handle GET_COMICS_FAILURE', () => {
     const heroReducer = reducer(
       INITIAL_STATE,
       { type: GET_COMICS_FAILURE }
-    )
+    );
 
     const expected = {
       ...INITIAL_STATE,
-      isRequesting: false,
+      isRequestingComics: false,
       error: true
-    }
+    };
 
-    expect(heroReducer).toEqual(expected)
-  })
-
+    expect(heroReducer).toEqual(expected);
+  });
 });
