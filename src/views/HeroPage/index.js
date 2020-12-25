@@ -106,7 +106,10 @@ HeroPage.propTypes = {
   }).isRequired,
   getHero: PropTypes.func.isRequired,
   getComics: PropTypes.func.isRequired,
-  favoriteHero: PropTypes.func.isRequired
+  favoriteHero: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired
 };
 
 const mapStateToProps = ({ hero, heroes }) => ({ hero, heroes });

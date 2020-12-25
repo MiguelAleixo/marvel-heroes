@@ -3,10 +3,12 @@ import {
   GET_HEROES_SUCCESS,
   GET_HEROES_FAILURE,
   FAV_HERO_REQUESTING,
-  FAV_HERO_SUCCESS
+  FAV_HERO_SUCCESS,
+  FAV_HERO_FAILURE
 } from './constants';
 import api from '../../../providers/api';
 import { KEYS } from '../../../constants/keys';
+import { setFavorite } from '../../../utils/setFavorite';
 
 export function getHeroes(favorites) {
   return dispach => {
@@ -62,15 +64,17 @@ export function searchHeroe(value, favorites) {
 export function favoriteHero(hero, favorites) {
   return dispach => {
     dispach({ type: FAV_HERO_REQUESTING });
-    hero.fav = !hero.fav;
-
-    const payload = favorites.some(obj => obj.id === hero.id)
-      ? [...favorites.filter(i => i.id !== hero.id)]
-      : [...favorites, hero];
-
-    dispach({
-      type: FAV_HERO_SUCCESS,
-      payload
-    });
+    return setFavorite(hero, favorites)
+      .then(payload => {
+        dispach({
+          type: FAV_HERO_SUCCESS,
+          payload
+        });
+      })
+      .catch(() => {
+        dispach({
+          type: FAV_HERO_FAILURE
+        });
+      });
   };
 }
