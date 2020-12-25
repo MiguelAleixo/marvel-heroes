@@ -24,7 +24,7 @@ const initialStore = {
 
 const mockStore = configureMockStore([ReduxThunk]);
 
-describe('module:hero', () => {
+describe('hero: actions', () => {
   it('should get hero', (done) => {
     const id = 1011334;
     const store = mockStore(initialStore);
