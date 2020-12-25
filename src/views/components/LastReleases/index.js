@@ -8,7 +8,7 @@ import Comics from '../Comics';
 function LastReleases({ comics }) {
   return (
     <Container>
-      <Title> Ultimos lançamentos </Title>
+      <Title> { comics.length ? 'Ultimos lançamentos' : 'Este herói não possui nenhum quadrinho :(' } </Title>
       <ComicsContainer>
         {
           comics.map(obj => (<Comics comic={obj} />))
