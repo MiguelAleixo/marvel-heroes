@@ -2834,12 +2834,12 @@ export const heroes = {
             name: 'Weapon X (2002 - 2004)'
           },
           {
-            resourceURI: 'http://gateway.marvel.com/v1/public/series/1478',
-            name: 'Weapon X: Days of Future Now (2006)'
-          },
-          {
             resourceURI: 'http://gateway.marvel.com/v1/public/series/869',
             name: 'Weapon X: Days of Future Now (2005)'
+          },
+          {
+            resourceURI: 'http://gateway.marvel.com/v1/public/series/1478',
+            name: 'Weapon X: Days of Future Now (2006)'
           },
           {
             resourceURI: 'http://gateway.marvel.com/v1/public/series/3649',
@@ -3614,7 +3614,6 @@ export const favHeroes = {
       name: '3-D Man',
       description: '',
       modified: '2014-04-29T14:18:17-0400',
-      fav: true,
       thumbnail: {
         path: 'http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784',
         extension: 'jpg'
@@ -3825,7 +3824,8 @@ export const favHeroes = {
           type: 'comiclink',
           url: 'http://marvel.com/comics/characters/1011334/3-d_man?utm_campaign=apiRef&utm_source=07dfcf0b59e9784a3a8ac39c9fd7a0d3'
         }
-      ]
+      ],
+      fav: true
     },
     {
       id: 1017100,
@@ -6440,12 +6440,12 @@ export const favHeroes = {
             name: 'Weapon X (2002 - 2004)'
           },
           {
-            resourceURI: 'http://gateway.marvel.com/v1/public/series/1478',
-            name: 'Weapon X: Days of Future Now (2006)'
-          },
-          {
             resourceURI: 'http://gateway.marvel.com/v1/public/series/869',
             name: 'Weapon X: Days of Future Now (2005)'
+          },
+          {
+            resourceURI: 'http://gateway.marvel.com/v1/public/series/1478',
+            name: 'Weapon X: Days of Future Now (2006)'
           },
           {
             resourceURI: 'http://gateway.marvel.com/v1/public/series/3649',
