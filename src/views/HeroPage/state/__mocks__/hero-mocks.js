@@ -1315,15 +1315,15 @@ export const comics = {
       },
       variants: [
         {
+          resourceURI: 'http://gateway.marvel.com/v1/public/comics/91669',
+          name: 'Immortal Hulk (2018) #40 (Variant)'
+        },
+        {
           resourceURI: 'http://gateway.marvel.com/v1/public/comics/91667',
           name: 'Immortal Hulk (2018) #40 (Variant)'
         },
         {
           resourceURI: 'http://gateway.marvel.com/v1/public/comics/91668',
-          name: 'Immortal Hulk (2018) #40 (Variant)'
-        },
-        {
-          resourceURI: 'http://gateway.marvel.com/v1/public/comics/91669',
           name: 'Immortal Hulk (2018) #40 (Variant)'
         }
       ],

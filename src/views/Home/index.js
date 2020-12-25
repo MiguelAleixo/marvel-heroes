@@ -91,21 +91,23 @@ class Home extends React.Component {
         { !heroes.isRequesting ? (
           <HeroesContainer>
             {
-              !onlyFav ? (heroes.content.results.map(obj => (
-                <Hero
-                  onClick={() => this.navigate(obj.id)}
-                  onFav={() => this.favoriteHero(obj)}
-                  favorites={heroes.favorites}
-                  hero={obj}
-                />
-              ))) : (heroes.favorites.map(obj => (
-                <Hero
-                  onClick={() => this.navigate(obj.id)}
-                  onFav={() => this.favoriteHero(obj)}
-                  favorites={heroes.favorites}
-                  hero={obj}
-                />
-              )))
+              !onlyFav
+                ? (heroes.content.results.map(obj => (
+                  <Hero
+                    onClick={() => this.navigate(obj.id)}
+                    onFav={() => this.favoriteHero(obj)}
+                    favorites={heroes.favorites}
+                    hero={obj}
+                  />
+                )))
+                : (heroes.favorites.map(obj => (
+                  <Hero
+                    onClick={() => this.navigate(obj.id)}
+                    onFav={() => this.favoriteHero(obj)}
+                    favorites={heroes.favorites}
+                    hero={obj}
+                  />
+                )))
             }
           </HeroesContainer>
         ) : <Loading />
