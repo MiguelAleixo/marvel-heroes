@@ -17,7 +17,7 @@ function TextField({
 TextField.propTypes = {
   value: PropTypes.any,
   placeholder: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   color: PropTypes.string,
   disabled: PropTypes.bool
 };

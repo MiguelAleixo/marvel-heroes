@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import thunk from 'redux-thunk';
-import logger from 'redux-logger';
 import Home from './views/Home';
 import HeroPage from './views/HeroPage';
 import heroes from './views/Home/state/reducer';
@@ -14,7 +13,7 @@ const store = createStore(
     heroes,
     hero
   }),
-  applyMiddleware(logger, thunk),
+  applyMiddleware(thunk),
 );
 
 function App() {

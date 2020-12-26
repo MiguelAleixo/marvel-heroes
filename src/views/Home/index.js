@@ -94,6 +94,7 @@ class Home extends React.Component {
               !onlyFav
                 ? (heroes.content.results.map(obj => (
                   <Hero
+                    key={obj.id}
                     onClick={() => this.navigate(obj.id)}
                     onFav={() => this.favoriteHero(obj)}
                     favorites={heroes.favorites}
@@ -102,6 +103,7 @@ class Home extends React.Component {
                 )))
                 : (heroes.favorites.map(obj => (
                   <Hero
+                    key={obj.id}
                     onClick={() => this.navigate(obj.id)}
                     onFav={() => this.favoriteHero(obj)}
                     favorites={heroes.favorites}

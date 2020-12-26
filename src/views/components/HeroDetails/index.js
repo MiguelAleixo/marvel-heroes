@@ -37,7 +37,7 @@ HeroDetails.propTypes = {
   hero: PropTypes.shape({
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    fav: PropTypes.bool.isRequired,
+    fav: PropTypes.bool,
     comics: PropTypes.shape({
       available: PropTypes.number.isRequired,
     }).isRequired,
@@ -48,8 +48,8 @@ HeroDetails.propTypes = {
       path: PropTypes.string.isRequired,
       extension: PropTypes.string.isRequired
     }).isRequired,
-  }).isRequired,
-  favorites: PropTypes.bool,
+  }),
+  favorites: PropTypes.array,
   onFav: PropTypes.func.isRequired
 };
 

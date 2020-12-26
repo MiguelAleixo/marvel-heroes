@@ -11,7 +11,7 @@ function LastReleases({ comics }) {
       <Title> { comics.length ? 'Ultimos lançamentos' : 'Este herói não possui nenhum quadrinho :(' } </Title>
       <ComicsContainer>
         {
-          comics.map(obj => (<Comics comic={obj} />))
+          comics.map(obj => (<Comics key={obj.id} comic={obj} />))
         }
       </ComicsContainer>
     </Container>
@@ -19,7 +19,7 @@ function LastReleases({ comics }) {
 }
 
 LastReleases.propTypes = {
-  comics: PropTypes.object.isRequired
+  comics: PropTypes.array.isRequired
 };
 
 export default LastReleases;
