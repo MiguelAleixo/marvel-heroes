@@ -20,3 +20,6 @@
 
 - Sobre a data do último quadrinho, como existem alguns dados incongruentes como datas negativas, decidi mantê-lo estático também.
 
+
+- Sobre os testes, os resultados carregados diretos da Marvel API mudam constantemente, deste modo, pode existir quebras nos testes, após a atualização da mesma
+
