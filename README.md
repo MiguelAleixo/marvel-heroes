@@ -66,6 +66,12 @@ A interface Web está disponivel através do link abaixo:
 
 https://marvel-heroes-challenge.herokuapp.com/
 
+Por se tratar de um serviço gratuito (Heroku),
+quando a aplicação ficar inativa por mais de 30 minutos,
+ela irá adormecer. Deste modo ao acessar a pagina pela primeira vez, 
+pode ocorrer lentidão, recomendo que espere alguns minutos e
+atualize a pagina se caso precisar :D
+
 ## Autor
 
 - Miguel Gomes Aleixo Ferreira Lima
